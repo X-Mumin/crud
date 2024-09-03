@@ -4,8 +4,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
-public class StaffController {
+public class StaffController
+{
+    // class level list to be not recreated every time getStaffDetails is called.
+    List<Staff> staffList = new ArrayList<>(List.of(
+            new Staff("Mumin", "Developer", 15000),
+            new Staff("Muhammad", "Developer", 10000),
+            new Staff("Ahmad", "Developer", 20000)
+    ));
 
     /**
      * This controller method is used to handle GET requests to the "/staffdetails"
@@ -16,9 +26,10 @@ public class StaffController {
      * @return The name of the view that is rendered.
      */
     @GetMapping("/staffdetails")
-    public String getStaffDetails(Model model) {
-        Staff staff1 = new Staff("Mumin", "Developer", 10000);
-        model.addAttribute("staff", staff1);
+    public String getStaffDetails(Model model)
+    {
+
+        model.addAttribute("staffList", staffList);
 
         return "staffdetails";
     }

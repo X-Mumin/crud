@@ -11,15 +11,18 @@
             max-width: 600px;
             margin: 20px auto;
         }
+
         th, td {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
         }
+
         th {
             background-color: #f2f2f2;
             font-weight: bold;
         }
+
         tr:nth-child(even) {
             background-color: #f9f9f9;
         }
@@ -35,22 +38,12 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:object="${staff}">
-        <td th:text="*{getStaffName()}"></td>
-        <td th:text="*{getStaffTitle()}"></td>
-        <td>
-            <p th:text="*{getStaffSalary() > 8000 ? 'Good Salary' : 'Bad Salary'}"></p>
-        </td>
-    </tr>
+        <tr th:each="staff : ${staffList}">
+            <td th:text="${staff.getStaffName()}"></td>
+            <td th:text="${staff.getStaffTitle()}"></td>
+            <td th:text="${staff.getStaffSalary()}"></td>
+        </tr>
     </tbody>
 </table>
-
-<div th:switch="${staff.getStaffName()}">
-    <p th:case="'Muhammad'">Hi, Muhammad!</p>
-    <p th:case="'Mumin'">Hi, Mumin!</p>
-    <p th:case="'Ahmad'">Hi, Ahmad!</p>
-    <p th:case="*">Hi, Guest!</p>
-</div>
-
 </body>
 </html>
