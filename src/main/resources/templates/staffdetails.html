@@ -3,8 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee Table</title>
+    <title>Employees Table</title>
     <style>
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .center-screen {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
         table {
             border-collapse: collapse;
             width: 100%;
@@ -29,21 +40,26 @@
     </style>
 </head>
 <body>
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Title</th>
-        <th>Salary</th>
-    </tr>
-    </thead>
-    <tbody>
-        <tr th:each="staff : ${staffList}">
-            <td th:text="${staff.getStaffName()}"></td>
-            <td th:text="${staff.getStaffTitle()}"></td>
-            <td th:text="${staff.getStaffSalary()}"></td>
+<h1>Employee Details</h1>
+
+<div class="center-screen">
+
+    <table style="width: 100%">
+
+        <tr>
+            <th>Staff Name</th>
+            <th>Staff Title</th>
+            <th>Staff Salary</th>
         </tr>
-    </tbody>
-</table>
+
+        <tr th:each="staff : ${staffList}">
+            <td th:text="${staff.staffName}"></td>
+            <td th:text="${staff.staffTitle}"></td>
+            <td th:text="${staff.staffSalary}"></td>
+        </tr>
+
+    </table>
+
+</div>
 </body>
 </html>

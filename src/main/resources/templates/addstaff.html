@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Details Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .center-screen {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px; /* Increased space between fields */
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        label {
+            display: inline-block;
+            margin-bottom: 2px;
+            text-align: left;
+            width: auto; /* Allow label to be as wide as its content */
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            width: 50%; /* Medium size */
+            margin: 20px auto 0; /* Center align */
+            display: block; /* Ensures centering works */
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Add New Employee</h2>
+
+<div class="center-screen">
+
+    <form method="post" th:object="${staff}" th:action="@{/submitformdata}">
+
+        <div class="form-group">
+            <label for="staffName">Staff Name</label><br>
+            <input type="text" id="staffName" name="staffName" required
+                   placeholder="Enter Staff Name"
+                   th:field="*{staffName}">
+        </div>
+
+        <div class="form-group">
+            <label for="staffTitle">Staff Title</label><br>
+            <input type="text" id="staffTitle" name="staffTitle" required
+                   placeholder="Enter Staff Title"
+                   th:field="*{staffTitle}">
+        </div>
+
+        <div class="form-group">
+            <label for="staffSalary">Staff Salary</label><br>
+            <input type="number" id="staffSalary" name="staffSalary" step="0.01"
+                   required placeholder="Enter Staff Salary"
+                   th:field="*{staffSalary}">
+        </div>
+
+        <input type="submit" value="Add Staff">
+
+    </form>
+</div>
+
+</body>
+</html>
