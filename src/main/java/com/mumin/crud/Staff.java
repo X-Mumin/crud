@@ -1,17 +1,15 @@
 package com.mumin.crud;
 
+import java.util.UUID;
+
 public class Staff {
     private String staffName;
     private String staffTitle;
     private double staffSalary;
-
-    public Staff(String staffName, String staffTitle, double staffSalary) {
-        this.staffName = staffName;
-        this.staffTitle = staffTitle;
-        this.staffSalary = staffSalary;
-    }
+    private String staffId;
 
     public Staff() {
+        this.staffId = UUID.randomUUID().toString();
     }
 
     public String getStaffName() {
@@ -36,5 +34,15 @@ public class Staff {
 
     public void setStaffSalary(double staffSalary) {
         this.staffSalary = staffSalary;
+    }
+
+    public String getStaffId()
+    {
+        return staffId;
+    }
+
+    public void setStaffId(String staffId)
+    {
+        this.staffId = staffId;
     }
 }

@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,19 +23,45 @@ public class StaffController
      * @param model The model that is passed to the view.
      * @return The name of the view that is rendered.
      */
+
+    // id comes from <td><a th:href="@{/(id=${staff.staffId})}">Edit</a></td>
     @GetMapping("/")
-    public String addStaff(Model model)
+    public String addStaff(Model model, @RequestParam(required = false) String id)
     {
         Staff staff = new Staff();
+
+        int index = getStaffIndex(id);
+
+        if (index != -1) {
+            staff = staffList.get(index);
+        }
+
         model.addAttribute("staff", staff);
 
         return "addstaff";
     }
 
+    private int getStaffIndex(String staffId)
+    {
+        for (int i = 0; i < staffList.size(); i++) {
+            if (staffList.get(i).getStaffId().equals(staffId)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     @PostMapping("/submitformdata")
     public String submitForm(Staff staff)
     {
-        staffList.add(staff);
+        int index = getStaffIndex(staff.getStaffId());
+
+        if (index == -1) {
+            staffList.add(staff);
+        } else {
+            staffList.set(index, staff);
+        }
+
         return "redirect:/staffdetails";
     }
 

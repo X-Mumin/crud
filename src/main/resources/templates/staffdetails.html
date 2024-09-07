@@ -56,6 +56,8 @@
             <td th:text="${staff.staffName}"></td>
             <td th:text="${staff.staffTitle}"></td>
             <td th:text="${staff.staffSalary}"></td>
+            <td><a th:href="@{/(id=${staff.staffId})}">Edit</a></td>
+            <!--    id is used as a path variable in the controller method     -->
         </tr>
 
     </table>
