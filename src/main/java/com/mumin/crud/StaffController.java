@@ -32,7 +32,7 @@ public class StaffController
 
         int index = getStaffIndex(id);
 
-        if (index != -1) {
+        if (index != Constants.NO_MATCH) {
             staff = staffList.get(index);
         }
 
@@ -48,7 +48,7 @@ public class StaffController
                 return i;
             }
         }
-        return -1;
+        return Constants.NO_MATCH;
     }
 
     @PostMapping("/submitformdata")
@@ -56,7 +56,7 @@ public class StaffController
     {
         int index = getStaffIndex(staff.getStaffId());
 
-        if (index == -1) {
+        if (index == Constants.NO_MATCH) {
             staffList.add(staff);
         } else {
             staffList.set(index, staff);
