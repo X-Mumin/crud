@@ -1,8 +1,11 @@
 package com.mumin.crud;
 
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -52,8 +55,12 @@ public class StaffController
     }
 
     @PostMapping("/submitformdata")
-    public String submitForm(Staff staff)
+    public String submitForm(@Valid @ModelAttribute("staff") Staff staff, BindingResult result)
     {
+        if (result.hasErrors()) {
+            return "addstaff";
+        }
+
         int index = getStaffIndex(staff.getStaffId());
 
         if (index == Constants.NO_MATCH) {
