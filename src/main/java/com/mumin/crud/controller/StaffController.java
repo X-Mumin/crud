@@ -1,5 +1,7 @@
-package com.mumin.crud;
+package com.mumin.crud.controller;
 
+import com.mumin.crud.Staff;
+import com.mumin.crud.service.StaffService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,14 +11,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Controller
 public class StaffController
 {
-
-    List<Staff> staffList = new ArrayList<>();
+    StaffService staffService = new StaffService();
 
     /**
      * This controller method is used to handle GET requests to the "/staffdetails"
@@ -31,27 +29,9 @@ public class StaffController
     @GetMapping("/")
     public String addStaff(Model model, @RequestParam(required = false) String id)
     {
-        Staff staff = new Staff();
-
-        int index = getStaffIndex(id);
-
-        if (index != Constants.NO_MATCH) {
-            staff = staffList.get(index);
-        }
-
-        model.addAttribute("staff", staff);
+        model.addAttribute("staff", staffService.getStaffById(id));
 
         return "addstaff";
-    }
-
-    private int getStaffIndex(String staffId)
-    {
-        for (int i = 0; i < staffList.size(); i++) {
-            if (staffList.get(i).getStaffId().equals(staffId)) {
-                return i;
-            }
-        }
-        return Constants.NO_MATCH;
     }
 
     @PostMapping("/submitformdata")
@@ -61,13 +41,7 @@ public class StaffController
             return "addstaff";
         }
 
-        int index = getStaffIndex(staff.getStaffId());
-
-        if (index == Constants.NO_MATCH) {
-            staffList.add(staff);
-        } else {
-            staffList.set(index, staff);
-        }
+        staffService.submitStaff(staff);
 
         return "redirect:/staffdetails";
     }
@@ -75,7 +49,7 @@ public class StaffController
     @GetMapping("/staffdetails")
     public String getStaffDetails(Model model)
     {
-        model.addAttribute("staffList", staffList);
+        model.addAttribute("staffList", staffService.getAllStaff());
 
         return "staffdetails";
     }
