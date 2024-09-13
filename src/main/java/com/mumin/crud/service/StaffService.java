@@ -3,12 +3,19 @@ package com.mumin.crud.service;
 import com.mumin.crud.Constants;
 import com.mumin.crud.Staff;
 import com.mumin.crud.repository.StaffRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class StaffService
 {
-    StaffRepository staffRepository = new StaffRepository();
+    StaffRepository staffRepository;
+
+    public StaffService(StaffRepository staffRepository)
+    {
+        this.staffRepository = staffRepository;
+    }
 
     public Staff getStaffByIndex(int index)
     {

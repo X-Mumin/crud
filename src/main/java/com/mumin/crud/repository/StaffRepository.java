@@ -1,10 +1,12 @@
 package com.mumin.crud.repository;
 
 import com.mumin.crud.Staff;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class StaffRepository
 {
     private List<Staff> staffList = new ArrayList<>();

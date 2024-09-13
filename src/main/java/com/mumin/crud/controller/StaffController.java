@@ -14,7 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class StaffController
 {
-    StaffService staffService = new StaffService();
+    StaffService staffService;
+
+    public StaffController(StaffService staffService)
+    {
+        this.staffService = staffService;
+    }
 
     /**
      * This controller method is used to handle GET requests to the "/staffdetails"
